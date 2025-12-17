@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Preview server for the Lumen Café site.
+Preview server for the 洋ちゃれのカフェ homepage.
 Run this file and open http://localhost:8000 to view index.html.
 """
 import argparse
