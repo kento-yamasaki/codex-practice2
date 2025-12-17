@@ -1,312 +1,565 @@
-diff --git a/index.html b/index.html
-index 8b137891791fe96927ad78e64b0aad7bded08bdc..67f776ad095065e79363b39270890d62443c3ff9 100644
---- a/index.html
-+++ b/index.html
-@@ -1 +1,306 @@
-+<!DOCTYPE html>
-+<html lang="ja">
-+<head>
-+  <meta charset="UTF-8">
-+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-+  <title>社内AI勉強会のお知らせ</title>
-+  <link rel="preconnect" href="https://fonts.googleapis.com">
-+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-+  <style>
-+    :root {
-+      color-scheme: light;
-+      --bg: #0d1117;
-+      --card: #111827;
-+      --accent: #7dd3fc;
-+      --accent-strong: #22d3ee;
-+      --muted: #9ca3af;
-+      --text: #e5e7eb;
-+      --shadow: 0 24px 50px rgba(0, 0, 0, 0.4);
-+      --radius: 24px;
-+    }
- 
-+    * {
-+      box-sizing: border-box;
-+    }
-+
-+    body {
-+      margin: 0;
-+      background: radial-gradient(circle at 20% 20%, rgba(125, 211, 252, 0.12), transparent 35%),
-+        radial-gradient(circle at 80% 0%, rgba(34, 211, 238, 0.15), transparent 30%),
-+        var(--bg);
-+      color: var(--text);
-+      font-family: 'Inter', 'Noto Sans JP', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-+      min-height: 100vh;
-+      display: flex;
-+      align-items: center;
-+      justify-content: center;
-+      padding: 48px 16px 64px;
-+    }
-+
-+    .page {
-+      width: min(1200px, 100%);
-+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-+      border: 1px solid rgba(255, 255, 255, 0.06);
-+      border-radius: 32px;
-+      overflow: hidden;
-+      box-shadow: var(--shadow);
-+    }
-+
-+    header {
-+      position: relative;
-+      height: 420px;
-+      display: grid;
-+      place-items: center;
-+      background: linear-gradient(120deg, rgba(17, 24, 39, 0.2), rgba(17, 24, 39, 0.75)),
-+        url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80') center/cover;
-+    }
-+
-+    header::after {
-+      content: '';
-+      position: absolute;
-+      inset: 0;
-+      background: radial-gradient(circle at 30% 20%, rgba(125, 211, 252, 0.3), transparent 35%),
-+        radial-gradient(circle at 70% 10%, rgba(34, 211, 238, 0.35), transparent 30%);
-+      mix-blend-mode: screen;
-+    }
-+
-+    .badge {
-+      position: absolute;
-+      top: 32px;
-+      left: 32px;
-+      background: rgba(255, 255, 255, 0.12);
-+      color: var(--text);
-+      border: 1px solid rgba(255, 255, 255, 0.2);
-+      padding: 10px 16px;
-+      border-radius: 999px;
-+      font-weight: 700;
-+      letter-spacing: 0.04em;
-+      backdrop-filter: blur(10px);
-+      text-transform: uppercase;
-+      font-size: 12px;
-+    }
-+
-+    .title-block {
-+      position: relative;
-+      z-index: 1;
-+      text-align: center;
-+      max-width: 720px;
-+      padding: 0 24px;
-+    }
-+
-+    .eyebrow {
-+      display: inline-flex;
-+      align-items: center;
-+      gap: 10px;
-+      background: rgba(255, 255, 255, 0.16);
-+      color: #fff;
-+      padding: 10px 16px;
-+      border-radius: 999px;
-+      font-weight: 600;
-+      letter-spacing: 0.02em;
-+      margin-bottom: 16px;
-+      backdrop-filter: blur(8px);
-+      border: 1px solid rgba(255, 255, 255, 0.2);
-+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-+    }
-+
-+    .eyebrow svg {
-+      width: 18px;
-+      height: 18px;
-+      stroke: #fff;
-+    }
-+
-+    h1 {
-+      margin: 0 0 16px;
-+      font-size: clamp(32px, 3vw + 12px, 48px);
-+      line-height: 1.2;
-+      text-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-+    }
-+
-+    .lead {
-+      margin: 0 auto;
-+      max-width: 640px;
-+      color: rgba(229, 231, 235, 0.9);
-+      font-size: 17px;
-+      line-height: 1.7;
-+    }
-+
-+    .content {
-+      padding: 40px 32px 48px;
-+      background: linear-gradient(180deg, rgba(17, 24, 39, 0.92) 0%, rgba(13, 17, 23, 0.94) 100%);
-+      display: grid;
-+      gap: 16px;
-+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-+    }
-+
-+    .card {
-+      background: var(--card);
-+      border-radius: var(--radius);
-+      border: 1px solid rgba(255, 255, 255, 0.05);
-+      padding: 24px;
-+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-+      position: relative;
-+      overflow: hidden;
-+      isolation: isolate;
-+    }
-+
-+    .card::before {
-+      content: '';
-+      position: absolute;
-+      inset: 0;
-+      background: radial-gradient(circle at 20% 20%, rgba(125, 211, 252, 0.09), transparent 45%);
-+      opacity: 0.9;
-+      z-index: -1;
-+    }
-+
-+    .card .label {
-+      display: inline-flex;
-+      align-items: center;
-+      gap: 10px;
-+      color: var(--accent);
-+      font-weight: 700;
-+      letter-spacing: 0.02em;
-+      text-transform: uppercase;
-+      font-size: 12px;
-+      margin-bottom: 8px;
-+      opacity: 0.85;
-+    }
-+
-+    .card h2 {
-+      margin: 0 0 8px;
-+      font-size: 22px;
-+      color: #fff;
-+    }
-+
-+    .card p {
-+      margin: 0;
-+      color: var(--muted);
-+      line-height: 1.6;
-+      font-size: 15px;
-+    }
-+
-+    .chip-row {
-+      display: flex;
-+      flex-wrap: wrap;
-+      gap: 10px;
-+      margin-top: 14px;
-+    }
-+
-+    .chip {
-+      display: inline-flex;
-+      align-items: center;
-+      gap: 8px;
-+      padding: 8px 12px;
-+      background: rgba(255, 255, 255, 0.05);
-+      border-radius: 999px;
-+      border: 1px solid rgba(255, 255, 255, 0.08);
-+      color: #fff;
-+      font-size: 13px;
-+    }
-+
-+    .chip svg {
-+      width: 16px;
-+      height: 16px;
-+      stroke: var(--accent-strong);
-+    }
-+
-+    @media (max-width: 640px) {
-+      header {
-+        height: 360px;
-+      }
-+
-+      body {
-+        padding: 32px 12px 56px;
-+      }
-+
-+      .content {
-+        padding: 28px 20px 32px;
-+      }
-+    }
-+  </style>
-+</head>
-+<body>
-+  <div class="page">
-+    <header>
-+      <div class="badge">Internal Event</div>
-+      <div class="title-block">
-+        <div class="eyebrow">
-+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-+            <path d="M12 3L4 7v6c0 5 3.5 9 8 9s8-4 8-9V7l-8-4z" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-+            <path d="M9 12h6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-+            <path d="M12 9v6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-+          </svg>
-+          AI Learning Session 2024
-+        </div>
-+        <h1>社内AI勉強会 〜アイデアをカタチにする夜〜</h1>
-+        <p class="lead">最新の生成AIトレンドや、業務に活かせるプロンプト活用の実例を共有しながら、メンバー同士でアイデアを膨らませるカジュアルな勉強会です。初参加の方も大歓迎！</p>
-+      </div>
-+    </header>
-+
-+    <section class="content">
-+      <article class="card">
-+        <div class="label">Title</div>
-+        <h2>テーマ / 参加スタイル</h2>
-+        <p>「生成AIで日々の仕事をもっとスマートに」をテーマに、ライトニングトークとミニワークショップを組み合わせた形式で実施します。ノートPC持参での参加を推奨します。</p>
-+        <div class="chip-row">
-+          <span class="chip">
-+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-+              <path d="M5 13l4 4L19 7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-+            </svg>
-+            LT & ワークショップ
-+          </span>
-+          <span class="chip">
-+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-+              <path d="M5 13l4 4L19 7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-+            </svg>
-+            初心者歓迎
-+          </span>
-+        </div>
-+      </article>
-+
-+      <article class="card">
-+        <div class="label">Date & Time</div>
-+        <h2>開催日時</h2>
-+        <p>2024年7月18日（木）18:30 - 20:30<br>※ 18:15より受付開始。軽食とドリンクをご用意しています。</p>
-+        <div class="chip-row">
-+          <span class="chip">
-+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-+              <path d="M12 8v4l3 3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-+              <circle cx="12" cy="12" r="9" stroke-width="1.7" />
-+            </svg>
-+            2時間セッション
-+          </span>
-+          <span class="chip">
-+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-+              <path d="M5 13l4 4L19 7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-+            </svg>
-+            受付開始 18:15
-+          </span>
-+        </div>
-+      </article>
-+
-+      <article class="card">
-+        <div class="label">Location</div>
-+        <h2>開催場所</h2>
-+        <p>本社 18F ラウンジエリア（東京都〇〇区）<br>最寄り駅から徒歩3分。入館証は1F受付でお受け取りください。</p>
-+        <div class="chip-row">
-+          <span class="chip">
-+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-+              <path d="M12 21s7-4.35 7-11a7 7 0 10-14 0c0 6.65 7 11 7 11z" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-+              <circle cx="12" cy="10" r="2.5" stroke-width="1.7" />
-+            </svg>
-+            本社18F ラウンジ
-+          </span>
-+          <span class="chip">
-+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-+              <path d="M5 13l4 4L19 7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-+            </svg>
-+            アクセス良好（駅徒歩3分）
-+          </span>
-+        </div>
-+      </article>
-+    </section>
-+  </div>
-+</body>
-+</html>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>洋ちゃれのカフェ | 光と音が溶け合う街角のサードプレイス</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #0c0e11;
+      --panel: rgba(255, 255, 255, 0.04);
+      --card: #0f141a;
+      --accent: #f7c35f;
+      --accent-2: #9ae6ff;
+      --text: #f7f7fb;
+      --muted: #9aa3b5;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+      --radius: 22px;
+    }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(247, 195, 95, 0.1), transparent 30%),
+        radial-gradient(circle at 80% 10%, rgba(154, 230, 255, 0.14), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      font-family: 'Inter', 'Noto Sans JP', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 14px 48px;
+    }
+
+    .page {
+      width: min(1180px, 100%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    header {
+      position: relative;
+      min-height: 420px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      background: linear-gradient(120deg, rgba(12, 14, 17, 0.6), rgba(12, 14, 17, 0.92)),
+        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80') center/cover;
+      isolation: isolate;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 20%, rgba(247, 195, 95, 0.18), transparent 35%),
+        radial-gradient(circle at 70% 10%, rgba(154, 230, 255, 0.2), transparent 35%);
+      mix-blend-mode: screen;
+      z-index: 0;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      padding: 44px 40px 48px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.24);
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      width: fit-content;
+    }
+
+    .logo-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #ff8e72);
+      box-shadow: 0 0 0 6px rgba(247, 195, 95, 0.22);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 3vw + 16px, 52px);
+      line-height: 1.15;
+      font-family: 'Playfair Display', 'Noto Sans JP', serif;
+      letter-spacing: 0.02em;
+      text-shadow: 0 18px 55px rgba(0, 0, 0, 0.55);
+    }
+
+    .brand-name {
+      margin: 4px 0 2px;
+      font-size: clamp(44px, 4vw + 24px, 76px);
+      line-height: 1.05;
+      font-family: 'Playfair Display', 'Noto Sans JP', serif;
+      letter-spacing: 0.04em;
+      text-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+    }
+
+    .lead {
+      margin: 0;
+      color: rgba(247, 247, 251, 0.92);
+      font-size: 17px;
+      line-height: 1.8;
+      max-width: 520px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      padding: 14px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #0c0e11;
+      background: linear-gradient(135deg, var(--accent), #ff9f7f);
+      box-shadow: 0 12px 30px rgba(255, 159, 127, 0.35);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 38px rgba(255, 159, 127, 0.42);
+    }
+
+    .btn.secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: none;
+    }
+
+    .hero-side {
+      position: relative;
+      z-index: 1;
+      padding: 40px 40px 40px 0;
+      display: grid;
+      place-items: end;
+    }
+
+    .glass-card {
+      width: min(420px, 92%);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 28px;
+      backdrop-filter: blur(14px);
+      padding: 22px 22px 18px;
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
+      color: #fff;
+    }
+
+    .glass-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .hours-list {
+      display: grid;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 14px;
+    }
+
+    .hours-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.24);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      background: rgba(0, 0, 0, 0.24);
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--accent-2);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-top: 10px;
+    }
+
+    .content {
+      padding: 36px 28px 44px;
+      background: linear-gradient(180deg, rgba(12, 14, 17, 0.96) 0%, rgba(8, 10, 13, 0.98) 100%);
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 22px;
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(247, 195, 95, 0.08), transparent 48%);
+      opacity: 0.9;
+      z-index: -1;
+    }
+
+    .card .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-size: 12px;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 13px;
+    }
+
+    .chip svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--accent);
+    }
+
+    .menu-panel {
+      background: var(--panel);
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 20px;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.32);
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .menu-panel h3 {
+      margin: 0;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 10px;
+      border-radius: 14px;
+      transition: background 140ms ease;
+    }
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .menu-name {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .menu-name strong {
+      font-size: 15px;
+      color: #fff;
+    }
+
+    .menu-name span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .price {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    @media (max-width: 900px) {
+      header {
+        grid-template-columns: 1fr;
+        min-height: 520px;
+      }
+
+      .hero-side {
+        padding: 0 32px 40px;
+        place-items: start;
+      }
+
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 22px 10px 32px;
+      }
+
+      .hero-copy {
+        padding: 32px 26px 28px;
+      }
+
+      .content {
+        padding: 28px 18px 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="hero-copy">
+        <div class="logo-mark">
+          <span class="logo-dot"></span>
+          洋ちゃれのカフェ
+        </div>
+        <div class="brand-name">洋ちゃれのカフェ</div>
+        <h1>光がそっと降り注ぐ、夜までいたくなるカフェ。</h1>
+        <p class="lead">昼はスローな音楽と香り豊かなハンドドリップ、夜はシグネチャーカクテルと小さな灯り。洋ちゃれのカフェは、光と音が溶け合う街角のサードプレイスです。</p>
+        <div class="cta-row">
+          <a class="btn" href="#reservation">席を予約する</a>
+          <a class="btn secondary" href="#menu">メニューを見る</a>
+        </div>
+        <div class="tag">Free Wi-Fi ・ 全席電源 ・ 22:30まで営業</div>
+      </div>
+      <div class="hero-side">
+        <div class="glass-card">
+          <div class="glass-head">
+            本日のご案内
+            <span>Today</span>
+          </div>
+          <ul class="hours-list">
+            <li><span>Weekday</span><span>10:00 - 22:30</span></li>
+            <li><span>Weekend</span><span>9:00 - 23:00</span></li>
+            <li><span>Happy Hour</span><span>17:00 - 19:00</span></li>
+          </ul>
+          <div class="tag">ルーフトップのキャンドル席、19:00よりご利用いただけます。</div>
+        </div>
+      </div>
+    </header>
+
+    <section class="content">
+      <div class="cards">
+        <article class="card">
+          <div class="label">Signature</div>
+          <h2>コーヒーへのこだわり</h2>
+          <p>自家焙煎のシングルオリジンを一杯ずつハンドドリップ。豆の持つ個性を引き出すため、オーダーごとに挽き目と抽出温度を調整しています。</p>
+          <div class="chip-row">
+            <span class="chip">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 13l4 4L19 7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              ハンドドリップ/エアロプレス
+            </span>
+            <span class="chip">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 13l4 4L19 7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              シングルオリジン3種
+            </span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="label">Mood</div>
+          <h2>夜を楽しむ小さなバー</h2>
+          <p>夕方からはバリスタがシェイカーを振るローテーブルバーに変身。季節のフルーツを使った低アルコールカクテルが人気です。</p>
+          <div class="chip-row">
+            <span class="chip">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 13l4 4L19 7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              Mocktail 4種類
+            </span>
+            <span class="chip">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 13l4 4L19 7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              Barista's Choice weekly
+            </span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="label">Space</div>
+          <h2>働く人のための快適さ</h2>
+          <p>全席電源と高速Wi-Fi、1人用ブースから4人席まで。静かなプレイリストと柔らかな照明で、深く集中できる空間を用意しました。</p>
+          <div class="chip-row">
+            <span class="chip">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 13l4 4L19 7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              全席電源＆USB-C
+            </span>
+            <span class="chip">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 13l4 4L19 7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              予約制ミーティングテーブル
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <aside id="menu" class="menu-panel">
+        <h3>Recommended Menu</h3>
+        <div class="menu-item">
+          <div class="menu-name">
+            <strong>エチオピア ナチュラル</strong>
+            <span>ベリーとフローラルが香る華やかな一杯</span>
+          </div>
+          <span class="price">¥680</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-name">
+            <strong>黒糖ラテ</strong>
+            <span>自家製黒糖シロップとスチームミルクのまろやかさ</span>
+          </div>
+          <span class="price">¥720</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-name">
+            <strong>季節のシトラスモクテル</strong>
+            <span>夕方限定・ノンアルコールカクテル</span>
+          </div>
+          <span class="price">¥780</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-name">
+            <strong>焼きたてフィナンシェ</strong>
+            <span>バターの香りが広がる、人気のペアリングスイーツ</span>
+          </div>
+          <span class="price">¥480</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-name">
+            <strong>ルーフトップ限定 プレート</strong>
+            <span>夜風と一緒に楽しむライトミール</span>
+          </div>
+          <span class="price">¥1,200</span>
+        </div>
+      </aside>
+    </section>
+
+    <section id="reservation" class="content" style="grid-template-columns: 1fr; gap: 12px;">
+      <article class="card" style="padding: 26px 22px; display: grid; gap: 12px; align-items: center;">
+        <div>
+          <div class="label">Reservation</div>
+          <h2>席のご予約・貸切について</h2>
+          <p>2名〜8名までのテーブル予約と、20名規模のナイトイベント貸切を承っています。スタッフがシーンに合わせた照明・音楽をご提案します。</p>
+        </div>
+        <div class="chip-row">
+          <span class="chip">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 13l4 4L19 7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Web予約は前日22:00まで
+          </span>
+          <span class="chip">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 13l4 4L19 7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            平日昼はリモートワーク優先席あり
+          </span>
+        </div>
+        <a class="btn" href="mailto:hello@lumen-cafe.jp">メールで問い合わせる</a>
+      </article>
+    </section>
+  </div>
+</body>
+</html>
